@@ -1,0 +1,32 @@
+clear all;
+clc
+[Lo_D,Hi_D,Lo_R,Hi_R]= wfilters ('db45');
+%stem实现画出杆状图
+subplot(221);
+stem(Lo_D,'color','r');
+xlim([0 95]);
+title('分解低通滤波器','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
+subplot(222);
+stem(Hi_D,'color','r');
+xlim([0 95]);
+title('分解高通滤波器','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
+subplot(223);
+stem(Lo_R,'color','r');
+xlim([0 95]);
+title('重构低通滤波器','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
+subplot(224);
+stem(Hi_R,'color','r');
+xlim([0 95]);
+title('重构高通滤波器','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');

@@ -1,0 +1,41 @@
+clear all;
+clc; 
+a=randn(1,128);
+b=1.8*sin(1:128);
+s=a+b;
+[cal,cd1]=dwt(s,'haar');
+subplot(311);
+plot(s,'k-');
+title('原始信号','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
+subplot(323);
+plot(cal,'k-');
+title('haar低频系数','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
+subplot(324);
+plot(cd1,'k-');
+title('haar高频系数','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
+%计算两个相关的分解滤波器，并直接使用该滤波器计算低频和高频系数
+[Lo_D,Hi_D]=wfilters('haar','d');
+[cal,cd1]=dwt(s,Lo_D,Hi_D);
+%进行单尺度db2离散小波变换并观察最后系数的边缘效果
+[ca2,cd2]=dwt(s,'db2');%db2也是一种小波函数
+subplot(325);
+plot(ca2,'k-');
+title('db2低频系数','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
+subplot(326);
+plot(cd2,'k-');
+title('db2高频系数','fontsize',10);
+axis tight;
+xlabel('x');
+ylabel('y');
