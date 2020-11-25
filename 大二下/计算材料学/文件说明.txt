@@ -1,0 +1,44 @@
+Edited by：张锦程
+小组成员：王宇祺  武逸飞  张抱朴  张锦程
+
+本小组文档有 html 和 pdf 两个版本，html 可用浏览器打开，里面的各种功能正常，
+
+由于技术原因，请将本文件夹直接放置在桌面上，然后再打开里面的pdf文档
+如果本文件夹没有在桌面上，则超链接无法工作，此时可打开相应文件夹查看源文件：
+
+参考的 A.Rahman 文献：reference\rahman1964.pdf
+
+md2 C++ 代码：md2,0.793,0.8073.cpp；md2,1.092,0.6815.cpp
+
+md2 python 可视化代码：（需要安装numpy、matplotlib、opencv-python才能运行）
+
+md2 python可视化视频：
+	T0.005：1_md2_lammps\T0.005
+	T0.01：  1_md2_lammps\T0.01
+	T0.05：  1_md2_lammps\T0.05
+	T0.1：    1_md2_lammps\T0.1
+	T0.5：    1_md2_lammps\T0.5
+	T1：       1_md2_lammps\T1
+	T2：       1_md2_lammps\T2
+
+md2 结果及原始 in 文件：1_md2_lammps\md2_T0.793
+		        1_md2_lammps\md2_T1.092
+
+
+2(a) in   文件：lammps\in.E1.Ar
+2(a) log 文件：lammps\E1-log.lammps
+2(a) 视频文件：videos\E1_video
+2(a) 图片文件：2_lammps_pictures\E1_img
+
+2(b) in   文件：lammps\in.E2.Ar
+2(b) log 文件：lammps\E2-log.lammps
+2(b) 视频文件：videos/E2_video
+2(b) 图片文件：2_lammps_pictures/E2_img
+
+
+参考网站：
+[Python](https://www.python.org/)
+[OpenCV](https://opencv.org/)
+[VTK](https://vtk.org/)
+[numpy](https://numpy.org/)
+[matplotlib](https://matplotlib.org/index.html)

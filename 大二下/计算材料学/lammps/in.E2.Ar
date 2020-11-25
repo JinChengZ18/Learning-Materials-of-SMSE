@@ -1,0 +1,49 @@
+#初始模拟系统设置
+units                         lj
+atom_style               atomic
+boundary                 p p p
+
+
+#构建BCC固态氩模型
+lattice                       bcc 3.556
+region                      box block 0 30 0 30 0 30# x,y,z 各方向上的晶胞重复单元数，即区域大小
+create_box	1 box #盒子内有1种原子
+create_atoms	1 box #在模拟的盒子中填满1种原子
+
+#定义原子间相互作用势
+mass                         * 1.0
+pair_style                  lj/cut 2.5   # 选取Ar的LJ势作为模型
+pair_coeff                 * * 1 1  #势函数信息
+
+#定义输出体系热力学信息
+thermo                       10
+dump                         1 all custom 100 dE id  type x y z
+
+#结构优化得到E_prefect的能量
+minimize                     1.0e-12 1.0e-12 10000 10000
+
+#记录第一次优化后的能量值与总原子数
+variable                        E0 equal etotal
+variable                        E_prefect equal ${E0}
+variable                        N equal count(all)
+variable                        N0 equal ${N}
+
+#删除两个相邻原子得到一个双空位
+region                          2 sphere 5.0 5.0 5.0 0.1 side in
+delete_atoms                 region 2
+region                          3 sphere 4.5 4.5 4.5 0.1 side in
+delete_atoms                 region 3
+
+#结构优化得到E_defect2的能量
+minimize                     1.0e-12 1.0e-12 10000 10000
+
+#记录第一次优化后的能量值与总原子数
+variable                        E_defect2 equal etotal
+
+
+#记录通过公式计算后的双空位形成能
+variable                        Ev equal (${E_defect2}-((${N0}-2)/${N0})*${E_prefect})
+
+#输出Ar固体的双空位形成能
+print "All done"
+print "Double vacancy formation energy = ${Ev}"

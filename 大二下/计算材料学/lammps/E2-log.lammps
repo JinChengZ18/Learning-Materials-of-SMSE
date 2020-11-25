@@ -1,0 +1,192 @@
+LAMMPS (15 Apr 2020)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (../comm.cpp:94)
+  using 1 OpenMP thread(s) per MPI task
+#初始模拟系统设置
+units                         lj
+atom_style               atomic
+boundary                 p p p
+
+
+#构建BCC固态氩模型
+lattice                       bcc 3.556
+Lattice spacing in x,y,z = 0.825447 0.825447 0.825447
+region                      box block 0 30 0 30 0 30# x,y,z 各方向上的晶胞重复单元数，即区域大小
+create_box	1 box #盒子内有1种原子
+Created orthogonal box = (0 0 0) to (24.7634 24.7634 24.7634)
+  1 by 1 by 1 MPI processor grid
+create_atoms	1 box #在模拟的盒子中填满1种原子
+Created 54000 atoms
+  create_atoms CPU = 0.00399089 secs
+
+#定义原子间相互作用势
+mass                         * 1.0
+pair_style                  lj/cut 2.5   # 选取Ar的LJ势作为模型
+pair_coeff                 * * 1 1  #势函数信息
+
+#定义输出体系热力学信息
+thermo                       10
+dump                         1 all custom 100 dE id  type x y z
+
+#结构优化得到E_prefect的能量
+minimize                     1.0e-12 1.0e-12 10000 10000
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (../min.cpp:190)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 2.8
+  ghost atom cutoff = 2.8
+  binsize = 1.4, bins = 18 18 18
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 64.11 | 64.11 | 64.11 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0    841.61579            0    841.61579    13265.014 
+       1            0    841.61579            0    841.61579    13265.014 
+Loop time of 0.535566 on 1 procs for 1 steps with 54000 atoms
+
+99.2% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+         841.615790459      841.615790459      841.615790459
+  Force two-norm initial, final = 6.40443e-08 6.36304e-08
+  Force max component initial, final = 3.06954e-10 3.09344e-10
+  Final line search alpha, max atom move = 1 3.09344e-10
+  Iterations, force evaluations = 1 2
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.45976    | 0.45976    | 0.45976    |   0.0 | 85.85
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.0758     |            |       | 14.15
+
+Nlocal:    54000 ave 54000 max 54000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    43309 ave 43309 max 43309 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    8.91e+06 ave 8.91e+06 max 8.91e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 8910000
+Ave neighs/atom = 165
+Neighbor list builds = 0
+Dangerous builds = 0
+
+#记录第一次优化后的能量值与总原子数
+variable                        E0 equal etotal
+variable                        E_prefect equal ${E0}
+variable                        E_prefect equal 841.615790458654
+variable                        N equal count(all)
+variable                        N0 equal ${N}
+variable                        N0 equal 54000
+
+#删除两个相邻原子得到一个双空位
+region                          2 sphere 5.0 5.0 5.0 0.1 side in
+delete_atoms                 region 2
+Deleted 1 atoms, new total = 53999
+region                          3 sphere 4.5 4.5 4.5 0.1 side in
+delete_atoms                 region 3
+Deleted 1 atoms, new total = 53998
+
+#结构优化得到E_defect2的能量
+minimize                     1.0e-12 1.0e-12 10000 10000
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (../min.cpp:190)
+Per MPI rank memory allocation (min/avg/max) = 64.11 | 64.11 | 64.11 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       1            0    841.58822            0    841.58822    13264.087 
+      10            0    841.55191            0    841.55191    13263.549 
+      20            0    841.53112            0    841.53112    13263.251 
+      30            0     841.4135            0     841.4135    13261.606 
+      40            0     841.2772            0     841.2772    13259.692 
+      50            0     840.9116            0     840.9116    13254.561 
+      60            0     840.5333            0     840.5333    13249.257 
+      70            0    839.95379            0    839.95379    13241.182 
+      80            0    839.72561            0    839.72561    13238.021 
+      90            0    839.53993            0    839.53993    13235.471 
+     100            0    839.44901            0    839.44901    13234.223 
+     110            0    839.36376            0    839.36376     13233.06 
+     120            0    839.29128            0    839.29128    13232.071 
+     130            0    839.27106            0    839.27106    13231.793 
+     140            0    839.24683            0    839.24683     13231.46 
+     150            0    839.21181            0    839.21181    13230.979 
+     160            0    839.15004            0    839.15004    13230.124 
+     170            0    839.10712            0    839.10712    13229.527 
+     180            0    839.09128            0    839.09128    13229.304 
+     190            0     839.0526            0     839.0526    13228.765 
+     200            0    839.03692            0    839.03692    13228.544 
+     210            0    839.01461            0    839.01461    13228.232 
+     220            0     838.9906            0     838.9906    13227.898 
+     230            0    838.96859            0    838.96859    13227.589 
+     240            0    838.88102            0    838.88102    13226.407 
+     250            0    838.85131            0    838.85131    13225.977 
+     260            0    838.84547            0    838.84547    13225.893 
+     270            0    838.84323            0    838.84323    13225.861 
+     280            0    838.84194            0    838.84194    13225.842 
+     290            0    838.80884            0    838.80884    13225.366 
+     300            0     838.7689            0     838.7689    13224.796 
+     310            0     838.7638            0     838.7638    13224.723 
+     320            0    838.76136            0    838.76136    13224.688 
+     330            0    838.74552            0    838.74552    13224.469 
+     340            0    838.71366            0    838.71366    13224.029 
+     348            0    838.65422            0    838.65422    13223.201 
+Loop time of 148.254 on 1 procs for 347 steps with 53998 atoms
+
+99.8% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = linesearch alpha is zero
+  Energy initial, next-to-last, final = 
+         841.588222767      838.654222416      838.654222416
+  Force two-norm initial, final = 13713.2 20903.5
+  Force max component initial, final = 2520.78 2985.95
+  Final line search alpha, max atom move = 5.81337e-11 1.73584e-07
+  Iterations, force evaluations = 347 742
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 119.47     | 119.47     | 119.47     |   0.0 | 80.59
+Neigh   | 26.793     | 26.793     | 26.793     |   0.0 | 18.07
+Comm    | 0.4295     | 0.4295     | 0.4295     |   0.0 |  0.29
+Output  | 0.34489    | 0.34489    | 0.34489    |   0.0 |  0.23
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.215      |            |       |  0.82
+
+Nlocal:    53998 ave 53998 max 53998 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    43385 ave 43385 max 43385 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    8.88878e+06 ave 8.88878e+06 max 8.88878e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 8888784
+Ave neighs/atom = 164.613
+Neighbor list builds = 168
+Dangerous builds = 71
+
+#记录第一次优化后的能量值与总原子数
+variable                        E_defect2 equal etotal
+
+
+#记录通过公式计算后的双空位形成能
+variable                        Ev equal (${E_defect2}-((${N0}-2)/${N0})*${E_prefect})
+variable                        Ev equal (838.654222416083-((${N0}-2)/${N0})*${E_prefect})
+variable                        Ev equal (838.654222416083-((54000-2)/${N0})*${E_prefect})
+variable                        Ev equal (838.654222416083-((54000-2)/54000)*${E_prefect})
+variable                        Ev equal (838.654222416083-((54000-2)/54000)*841.615790458654)
+
+#输出Ar固体的双空位形成能
+print "All done"
+All done
+print "Double vacancy formation energy = ${Ev}"
+Double vacancy formation energy = -2.93039708736876
+Total wall time: 0:02:29
