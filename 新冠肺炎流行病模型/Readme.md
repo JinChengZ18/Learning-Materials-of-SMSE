@@ -1,30 +1,32 @@
-![新冠肺炎流行病模型 -张锦程-2018012082_13](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_13.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_00](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_00.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_01](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_01.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_00](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/00.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_02](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_02.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_01](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/01.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_03](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_03.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_02](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/02.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_04](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_04.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_03](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/03.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_05](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_05.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_04](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/04.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_06](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_06.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_05](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/05.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_07](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_07.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_06](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/06.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_08](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_08.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_07](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/07.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_09](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_09.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_08](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/08.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_10](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_10.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_09](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/09.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_11](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_11.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_10](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/10.png)
 
-![新冠肺炎流行病模型 -张锦程-2018012082_12](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/新冠肺炎流行病模型 -张锦程-2018012082_12.png)
+![新冠肺炎流行病模型 -张锦程-2018012082_11](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/11.png)
+
+![新冠肺炎流行病模型 -张锦程-2018012082_12](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/12.png)
+
+![新冠肺炎流行病模型 -张锦程-2018012082_13](https://github.com/JinChengZ18/Learning-Materials-of-SMSE/blob/main/新冠肺炎流行病模型/草稿.assets/13.png)
 
 
 
