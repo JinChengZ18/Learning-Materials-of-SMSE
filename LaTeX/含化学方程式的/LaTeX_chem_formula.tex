@@ -1,0 +1,312 @@
+\documentclass[UTF8, a4paper]{article}
+\usepackage{ctex}
+\usepackage{extarrows}
+\usepackage{chemfig}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{bigfoot}
+\usepackage{fancyvrb}
+\usepackage{expl3}
+\usepackage{calc}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2cm,bottom=3cm}
+
+\title{使用\LaTeX\ 高效排版化学(方程)式}
+\author{chenken}
+\date{\today}
+
+\usepackage{hyperref}
+\renewcommand\contentsname{目录}
+\begin{document}
+\maketitle
+%生成文档目录
+\tableofcontents
+
+\newpage
+\section*{说明}
+\LaTeX 是一种功能强大的排版工具，其在数学公式排版方面的优势无可比拟。而且\LaTeX 非常适合于具有明确结构的文档的写作，因此很适合用于论文、尤其是理工科论文的写作。
+
+关于LaTeX中数学公式的输入方法网上有很多教程，而化学式和化学方程式的输入却没有太多的优质中文教程可以参考。本篇教程以介绍mhchem为主，参考了mhchem的文档\footnote{文档可以从\url{http://mirrors.opencas.org/ctan/macros/latex/contrib/mhchem/mhchem.pdf}获取, 这篇文档看起来很长，有58页，但只需要看到第19页就足够了}，挑选最主要的内容并加入个人的使用经验进行了改编及补充。mhchem能够满足在输入化学方程式方面的比较基本的需求，如果需要用\LaTeX 输入更复杂的结构，则需要借助其他的宏包(如PPCHTEX, chemfig)。
+
+阅读本文档之前最好事先了解\LaTeX 最基本语法和如何输入简单的数学表达式。之前对\LaTeX 一无所知的读者，可参考附录《快速体验指南》。不过注意，《指南》只是给希望快速体验到\LaTeX 输入化学(方程)式或数学公式之强大的读者准备的。在体验完之后还是要花适量的时间做必要的学习，通常，只需要把不明白的问题\textbf{Google}一下就可以了，如果找不到解决方案，就用英语描述再次搜索。
+
+\section{关于 mhchem}
+目前mhchem已经有好几个版本，我们现在所需要使用的是它的第四版，所以如果要使用mhchem，就在导言区添加:\verb|\usepackage[version=4]{mhchem}|(version=4指定使用mhchem的第四版)
+
+在写化学式时，要用$\verb|\|$ce\{\}把化学式及方程式括起来。比如在写硫酸时就需要这样:\verb|\ce{H2SO4}|%(\ce{H2SO4})
+\section{无机物}
+\subsection{整数: 下标、电荷数、氧化数}
+\begin{minipage}{.3\textwidth}
+	\ce{CO2}\\
+	\ce{H+}\\
+	\ce{Cu^2+}
+\end{minipage}
+\begin{minipage}{.7\textwidth}
+	\verb|\ce{CO2}|\\
+	\verb|\ce{H+}|\\
+	\verb|\ce{Cu^2+}|
+\end{minipage}
+
+\noindent 二价铜离子的表示中如果不加'\^{}'，观察区别:
+
+\begin{minipage}{.3\textwidth}
+	 \ce{Cu2+}
+\end{minipage}
+\begin{minipage}{.7\textwidth}
+	\verb|\ce{Cu2+}|
+\end{minipage}
+
+\noindent 把正号换成负号呢? \verb|\ce{Cl-}| : \ce{Cl-}\newline
+
+\noindent 氧化数的表示:
+
+\noindent 二价铁:\ce{Fe^{II}}\qquad \verb|\ce{Fe^{II}}|\\ 
+四价铅\ce{Pb^{IV}}\qquad \verb|\ce{Pb^{IV}}|
+
+\subsection{分数下标}
+和\LaTeX 普通的加入数学表达式的语法一样, 使用\verb|\frac{num}{den}|: 
+
+\ce{Fe(CN)_{$\frac{6}{2}$}}: \verb|\ce{Fe(CN)_{$\frac{6}{2}$}}|
+
+\subsection{圆括号、方括号、大括号}
+\begin{minipage}{.3\textwidth}
+	圆括号:\ce{(NH4)2S}\\
+	方括号:\ce{[AgCl2]-}\\
+	大括号:\ce{[\{(X2)3\}2]^3+}
+\end{minipage}
+\begin{minipage}{.7\textwidth}
+	\verb|\ce{(NH4)2S}|\\
+	\verb|\ce{[AgCl2]-}|\\
+	\verb|\ce{[\{(X2)3\}2]^3+}|
+\end{minipage}
+
+\textbf{要注意:}和圆括号及方括号相比，大括号之前需要加入转义符，否则不会被显示在最终的PDF文档中。
+\subsection{上标与下标: 同位素、分子离子}
+\begin{minipage}{.3\textwidth}
+	\ce{^{227}_{90}Th+}\\
+	\ce{H2+}
+\end{minipage}
+\begin{minipage}{.7\textwidth}
+	\verb|\ce{^{227}_{90}Th+}|\\
+	\verb|\ce{H2+}|
+\end{minipage}
+
+\subsection{圆点: 自由基、水合物}
+\begin{itemize}
+	\item 自由基\\
+	\begin{minipage}{.3\textwidth}
+	\ce{Cl*}\\
+	\ce{{}*CH3}
+	\end{minipage}
+	\begin{minipage}{.7\textwidth}
+	\verb|\ce{Cl*}|\\
+	\verb|\ce{{}*CH3}|，注意*之前的\{\}
+	\end{minipage}
+	\item 水合物\\
+	类比自由基的表示方法，水合物可以这样表示:\verb|\ce{KCr(SO4)2*12H2O}| $\rightarrow$ \ce{KCr(SO4)2*12H2O}
+\end{itemize}
+
+\section{有机物}
+\subsection{如何表示化学键}
+
+\begin{minipage}{.3\textwidth}
+	单键: \ce{CH3-CHO}\\
+	双键: \ce{CH2=CH2}\\
+	三键: \ce{CH#CH}\\
+	配位键: \ce{A\bond{->}B\bond{<-}C}
+\end{minipage}
+\begin{minipage}{.7\textwidth}
+	\verb|\ce{CH3-CHO}|\\
+	\verb|\ce{CH2=CH2}|\\
+	\verb|\ce{CH#CH}|\\
+	\ce{A\bond{->}B\bond{<-}C}
+\end{minipage}
+\newline
+更多的化学键：
+
+\begin{minipage}{.3\textwidth} %
+	\ce{A\bond{~}B\bond{~-}C}\\
+	\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D}\\
+	\ce{A\bond{...}B\bond{....}C}
+\end{minipage} %
+\begin{minipage}{.7\textwidth} %
+	\verb|\ce{A\bond{~}B\bond{~-}C}|\\
+	\verb|\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D}|\\
+	\verb|\ce{A\bond{...}B\bond{....}C}|
+\end{minipage}
+
+\subsection{斜体: $cis\ \&\ trans$}
+有机化学中用来表示顺反异构的''cis''与''trans''通常都写成斜体。如果对\LaTeX 语法有过了解的应该会知道，数学公式中的字母会被写成斜体。我们用来添加数学公式的符号是一对''\verb|$|''字符，所以为了表示顺式的2-丁烯，可以写成\verb|\ce{$cis${-}CH3CH=CHCH3}|，在最终的PDF文件中会显示\ce{$cis${-}CH3CH=CHCH3}
+\subsection{进一步学习: chemfig package}
+有机化合物的表示方法不止结构简式，如果需要在文章中插入有机物的结构式或者键线式:
+\begin{center}
+\chemfig{[:-30]HO--[:30](<[2]OH)-(<:[6]OH)-[:30](<:[2]OH)-(<:[6]OH)-[:30](=[2]O)-H}\footnote{该图形和下一个图形的代码摘自chemfig documentation}
+\end{center}
+
+有时可能还需要表示一下电子的转移, mhchem包就不够用了:
+\begin{center}
+\schemestart
+\chemfig{[:-30]*6(=-=(-@{atoc}C([6]=[@{db}]@{atoo1}O)-H)-=-)}
+\arrow(start.mid east--.mid west){->[\chemfig{@{atoo2}\chemabove{O}{\scriptstyle\ominus}}H]}
+\chemmove[-stealth,shorten >=2pt,dash pattern=on 1pt off 1pt,thin]{
+\draw[shorten <=8pt](atoo2) ..controls +(up:10mm) and +(up:10mm)..(atoc);
+\draw[shorten <=2pt](db) ..controls +(left:5mm) and +(west:5mm)..(atoo1);}
+\chemfig{[:-30]*6(=-=(-C([6]-[@{sb1}]@{atoo1}\chembelow{O}{\scriptstyle\ominus})([2]-OH)-[@{sb2}]H)-=-)}
+\hspace{1cm}
+\chemfig{[:-30]*6((-@{atoc}C([6]=[@{db}]@{atoo2}O)-[2]H)-=-=-=)}
+\chemmove[-stealth,shorten <=2pt,shorten >=2pt,dash pattern=on 1pt off 1pt,thin]{
+\draw([yshift=-4pt]atoo1.270) ..controls +(0:5mm) and +(right:10mm)..(sb1);
+\draw(sb2) ..controls +(up:10mm) and +(north west:10mm)..(atoc);
+\draw(db) ..controls +(right:5mm) and +(east:5mm)..(atoo2);}
+\arrow(@start.base west--){0}[-75,2]
+{}
+\arrow
+\chemfig{[:-30]*6(=-=(-C([1]-@{atoo2}O-[@{sb}0]@{atoh}H)([6]=O))-=-)}
+\arrow{0}
+\chemfig{[:-30]*6((-C(-[5]H)(-[7]H)-[2]@{atoo1}\chemabove{O}{\scriptstyle\ominus})-=-=-=)}
+\chemmove[-stealth,shorten >=2pt,dash pattern=on 1pt off 1pt,thin]{
+\draw[shorten <=7pt](atoo1.90) ..controls +(+90:8mm) and +(up:10mm)..(atoh);
+\draw[shorten <=2pt](sb) ..controls +(up:5mm) and +(up:5mm)..(atoo2);}
+\schemestop
+\end{center}
+
+
+至于这些图究竟如何画，可以参考chemfig包的文档: \url{http://ctan.sharelatex.com/tex-archive/macros/generic/chemfig/chemfig-en.pdf}
+
+但是这个包的学习会比较痛苦，而且效果未必尽如人意。因此如果遇到太复杂的结构式，更有效的方法是用化学绘图软件画出结构式保存成图片(如果能保存为PDF格式的图片更好)然后使用插入图片的方法来添加到文档中。
+
+\section{化学方程式}
+\subsection{箭头: 反应方向}
+可以打正向、可逆、正逆反应程度不同等类型的箭头\newline
+
+\begin{minipage}{.3\textwidth} %
+	\ \ce{->}\\
+	\ce{<=>}\\
+	\ce{<=>>}\\
+	\ce{<<=>}\\
+\end{minipage} %
+\begin{minipage}{.7\textwidth} %
+	\verb|\ce{->}|\\
+	\verb|\ce{<=>}|\\
+	\verb|\ce{<=>>}|\\
+	\verb|\ce{<<=>}|\\
+\end{minipage}
+
+还可以方便地添加反应条件:
+
+\begin{minipage}{.3\textwidth} %
+	$\ce{2H2 + O2 ->[\Delta] H2O}$\\
+	\ce{A ->[{text above}][{text below}] B}\\
+	\ce{N2 + H2 ->[{\mbox{催化剂}}][{\mbox{高温高压}}] NH3}
+\end{minipage} %
+\begin{minipage}{.7\textwidth} %
+	\verb|$\ce{2H2 + O2 ->[\Delta] H2O}$|\\
+	\verb|\ce{A ->[{text above}][{text below}] B}|\\
+	\verb|\ce{N2 + H2 ->[{\mbox{催化剂}}][{\mbox{高温高压}}] NH3}|\footnote{ {\verb|\mbox{text}|}可以用于在某些特殊环境中添加中文字符，具体用法可以参考网上资料，用Google搜索几乎能解决\LaTeX 使用中的一切问题(''几乎''是指还有少量问题无法得到直接答案，需要自己试一试)。不过当然，搜索需要一定的技巧和时间成本}
+	
+\end{minipage}
+
+值得注意的是，mhchem中没有提供一种''等号''供我们连接化学方程式的两端。如果仅仅需要使用最基本的等号，可以直接用''=''，需要添加反应条件时，则需要使用extarrows宏包中的\verb|\xlongequal|方法:\verb|$\ce{A2 + B2 \xlongequal[Cat]{1000^\circ C} 2AB}$|\footnote{具体用法是\verb|\xlongequal[线下方内容]{线上方内容}|，大括号里的在上，方括号里的在下}，最终效果就像这样:$\ce{A2 + B2 \xlongequal[Cat]{\rm 1000^\circ C} 2AB}$
+
+
+\subsection{箭头: 沉淀与气体}
+\begin{minipage}{.4\textwidth} %
+	\ce{Ca(OH)2 + CO2 = CaCO3 v + H2O}\\
+	\ce{Fe + 2H+ = H2 ^ + Fe^2+}
+\end{minipage} %
+\begin{minipage}{.6\textwidth} %
+	\verb|\ce{Ca(OH)2 + CO2 = CaCO3 v + H2O}|\\
+	\verb|\ce{Fe + 2H+ = H2 ^ + Fe^2+}|
+\end{minipage}
+
+\subsection{热化学方程式: 能量变化、分数计量数}
+需要在导言区添加两个包:
+\begin{verbatim*}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\end{verbatim*}
+
+化学式和能变之间用一个\verb|\qquad|分开\\
+$\ce{N2(g) + 3H2(g) -> 2NH3(g)} \qquad \Delta H_{\mathrm{f}}^\circ = \SI{-92.5}{kJ}$\\
+\verb|$\ce{N2(g) + 3H2(g) -> 2NH3(g)} \qquad \Delta H_{\mathrm{f}}^\circ = \SI{-92.5}{kJ}$|
+\section{其他内容}
+\subsection{如何在文字的下方添加标注}
+同素异形体和同分异构体的存在使我们有时候需要在化学式的下方添加说明: $\underset{\text{葡萄糖}}{\ce{C6H12O6}}$，实现这个效果我们要写的代码是\verb|$\underset{\text{葡萄糖}}{\ce{C6H12O6}}$|。
+
+\subsection{如何书写连续的多行反应式}
+\noindent 引入align环境
+\begin{Verbatim}[tabsize=4]
+\begin{align*}
+	Your text here.
+\end{align*}
+\end{Verbatim}
+每一行的开始加\verb|&|符号，结尾加换行符\verb|\\|:\\
+\begin{minipage}{.5\textwidth}
+\begin{Verbatim}[tabsize=4]
+\begin{align*}
+	& \ce{CO2 + 3H2 <=> CH3OH + H2O}\\
+	& \ce{CO2 + H2 <=> CO + H2O}\\
+	& \ce{CO + 2H2 <=> CH3OH}\\
+	& \ce{CH3OH <=> CH3OCH3 + H2O}
+\end{align*}
+\end{Verbatim}
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+\begin{align*}
+	& \ce{CO2 + 3H2 <=> CH3OH + H2O}\\
+	& \ce{CO2 + H2 <=> CO + H2O}\\
+	& \ce{CO + 2H2 <=> CH3OH}\\
+	& \ce{CH3OH <=> CH3OCH3 + H2O}
+\end{align*}
+\end{minipage}
+
+
+\section{附录}
+\subsection{快速体验指南}
+选择网上的在线编辑器或者安装好\LaTeX 编写环境后，将以下代码复制到编辑器内：
+\begin{verbatim}
+\documentclass[UTF8, a4paper]{article}
+\usepackage{extarrows}
+\usepackage{chemfig}
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{bigfoot}
+\usepackage{fancyvrb}
+\usepackage{expl3}
+\usepackage{calc}
+\usepackage{hyperref}
+\title{title}
+\author{author}
+\date{}
+%-------------------------------------------------------------------%
+%从\documentclass[...]{article}到\begin{document}之间这一片是导言区
+%-------------------------------------------------------------------%
+\begin{document}
+\maketitle
+%-------------------------------------------------------------------%
+%从\begin{document}到最后的\end{document}之间就是写正文内容的地方，本文所
+%介绍的各种化学式的写法全部写在这一片内，下面有两个例子：
+%-------------------------------------------------------------------%
+%化学方程式的例子
+\ce{N2 + H2 ->[{\mbox{催化剂}}][{\mbox{高温高压}}] NH3}
+%数学公式的例子
+\begin{displaymath}
+\lim_{x_2 \rightarrow 0} R_2 = \frac{6n_1^2M_1\gamma}{(n_1^2 + 2)^2}
+\end{displaymath}
+
+\end{document}
+\end{verbatim}
+
+只需要将需要的公式的\LaTeX 代码复制到指定区域，编译之后就能得到所需文档！
+
+\subsection{一些资源}
+\begin{itemize}
+	\item 环境配置: \url{https://www.zhihu.com/question/36038602} 
+	\item 入门教程: \url{https://www.ctan.org/pkg/lshort-zh-cn}
+\end{itemize}
+
+\end{document}
