@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="echarts.min.js"></script>
+       <script type="text/javascript" src="echarts-gl.min.js"></script>
+
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+
+//var data = [{name:'[1 0 0]',value:[1,0,0]},{name:'[0 1 1]',value:[0,1,1]}];
+var data1 = 
+[{'name': '[0 0 1]', 'value': [0.0, 0.0, 1.0]},
+ {'name': '[1 0 0]', 'value': [1.0, 0.0, 0.0]},
+ {'name': '[0 1 0]', 'value': [0.0, 1.0, 0.0]},
+ {'name': '[0 0 -1]', 'value': [0.0, 0.0, -1.0]},
+ {'name': '[-1 0 0]', 'value': [-1.0, 0.0, 0.0]},
+ {'name': '[0 -1 0]', 'value': [0.0, -1.0, 0.0]},
+ {'name': '[1 0 1]', 'value': [0.7071067811865475, 0.0, 0.7071067811865475]},
+ {'name': '[0 1 1]', 'value': [0.0, 0.7071067811865475, 0.7071067811865475]},
+ {'name': '[1 1 0]', 'value': [0.7071067811865475, 0.7071067811865475, 0.0]},
+ {'name': '[-1 0 -1]',
+  'value': [-0.7071067811865475, 0.0, -0.7071067811865475]},
+ {'name': '[0 -1 -1]',
+  'value': [0.0, -0.7071067811865475, -0.7071067811865475]},
+ {'name': '[-1 -1 0]',
+  'value': [-0.7071067811865475, -0.7071067811865475, 0.0]},
+ {'name': '[1 0 -1]', 'value': [0.7071067811865475, 0.0, -0.7071067811865475]},
+ {'name': '[0 1 -1]', 'value': [0.0, 0.7071067811865475, -0.7071067811865475]},
+ {'name': '[1 -1 0]', 'value': [0.7071067811865475, -0.7071067811865475, 0.0]},
+ {'name': '[-1 0 1]', 'value': [-0.7071067811865475, 0.0, 0.7071067811865475]},
+ {'name': '[0 -1 1]', 'value': [0.0, -0.7071067811865475, 0.7071067811865475]},
+ {'name': '[-1 1 0]', 'value': [-0.7071067811865475, 0.7071067811865475, 0.0]},
+ {'name': '[1 1 1]',
+  'value': [0.5773502691896258, 0.5773502691896258, 0.5773502691896258]},
+ {'name': '[-1 1 1]',
+  'value': [-0.5773502691896258, 0.5773502691896258, 0.5773502691896258]},
+ {'name': '[1 -1 1]',
+  'value': [0.5773502691896258, -0.5773502691896258, 0.5773502691896258]},
+ {'name': '[1 1 -1]',
+  'value': [0.5773502691896258, 0.5773502691896258, -0.5773502691896258]},
+ {'name': '[-1 -1 -1]',
+  'value': [-0.5773502691896258, -0.5773502691896258, -0.5773502691896258]},
+ {'name': '[1 -1 -1]',
+  'value': [0.5773502691896258, -0.5773502691896258, -0.5773502691896258]},
+ {'name': '[-1 1 -1]',
+  'value': [-0.5773502691896258, 0.5773502691896258, -0.5773502691896258]},
+ {'name': '[-1 -1 1]',
+  'value': [-0.5773502691896258, -0.5773502691896258, 0.5773502691896258]}]
+  ;
+
+
+var radius = 1;
+
+option = {
+    tooltip: {},
+    xAxis3D: {},
+    yAxis3D: {},
+    zAxis3D: {},
+    grid3D: {},
+    animation: true,
+    series: [{
+        name: '参考球',
+        type: 'surface',
+        parametric: true,
+        // shading: 'albedo',
+        wireframe: {
+            show: true
+        },
+        shading: 'color',
+        itemStyle: {
+            color: [1, 1, 1, 1],
+            opacity: 0.8
+        },
+
+        parametricEquation: {
+            u: {
+                min: -Math.PI,
+                max: Math.PI,
+                step: Math.PI / 20
+            },
+            v: {
+                min: 0,
+                max: Math.PI,
+                step: Math.PI / 20
+            },
+            x: function (u, v) {
+                return radius * Math.sin(v) * Math.sin(u);
+            },
+            y: function (u, v) {
+                return radius * Math.sin(v) * Math.cos(u);
+            },
+            z: function (u, v) {
+                return radius * Math.cos(v);
+            }
+        }
+    },
+    {
+        name: '球面投影点',
+        type: 'scatter3D',
+        blendMode: 'darken',
+        showEffectOn: 'render',
+        zlevel: 2,
+        symbol : 'circle',
+        label: {
+            show: true,
+            position: 'top',
+            formatter: '{b}'},
+        symbolSize: 10,
+        data: data1
+    }
+    ]
+};;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

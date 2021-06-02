@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="echarts.min.js"></script>
+       <script type="text/javascript" src="echarts-gl.min.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+var data = [];
+
+// Plane base
+l = [ 0.0       ,0.70710678, -0.70710678];
+m = [ 0.90453403, -0.30151134, -0.30151134];
+
+
+
+// Parametric curve
+for (var t = 0; t < 2 * Math.PI; t += 0.001) {
+    var x = l[0] * Math.cos(t) + m[0] * Math.sin(t);
+    var y = l[1] * Math.cos(t) + m[1] * Math.sin(t);
+    var z = l[2] * Math.cos(t) + m[2] * Math.sin(t);
+    data.push([x, y, z]);
+}
+
+option = {
+    tooltip: {},
+    backgroundColor: '#fff',
+    
+    xAxis3D: {},
+    yAxis3D: {},
+    zAxis3D: {},
+    grid3D: {
+        viewControl: {
+            projection: 'perspective'
+        }
+    },
+    series: [{
+        type: 'line3D',
+        data: data,
+        lineStyle: {
+            width: 4
+        }
+    }]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>
